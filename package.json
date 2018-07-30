@@ -1,0 +1,33 @@
+{
+  "name": "shopping-cart-demo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.4.0",
+    "@material-ui/icons": "^1.1.0",
+    "axios": "^0.18.0",
+    "jss-preset-default": "^4.5.0",
+    "jwt-decode": "^2.2.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-jss": "^8.6.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-form": "^7.4.2",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "serve": "json-server --watch ./db/db.json --port 3004",
+    "build": "react-scripts build --env-file=.env.production",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.5",
+    "redux-devtools": "^3.4.1"
+  }
+}
