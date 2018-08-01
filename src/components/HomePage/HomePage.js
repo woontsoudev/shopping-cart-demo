@@ -10,14 +10,17 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Modal from "@material-ui/core/Modal";
 import Paper from "@material-ui/core/Paper";
+import AddIcon from "@material-ui/icons/Add";
 
+import { CreateProduct } from "../index";
 import styles from "./styles";
 import { getProductsAction } from "../../reducers/products/actions/index";
 import { addProductAction } from "../../reducers/shoppingCart/actions/index";
 
 class HomePage extends Component {
   state = {
-    showModal: false,
+    showProductDetailModal: false,
+    showCreateProductModal: false,
     productDetail: {}
   };
 
@@ -42,7 +45,11 @@ class HomePage extends Component {
         product = { ...item };
       }
     });
-    this.setState({ showModal: true, productDetail: product });
+    this.setState({ showProductDetailModal: true, productDetail: product });
+  };
+
+  handleCreateProductModal = () => {
+    this.setState({ showCreateProductModal: true });
   };
 
   render() {
@@ -89,6 +96,15 @@ class HomePage extends Component {
 
     return (
       <div className={classes.root}>
+        <Button
+          variant="fab"
+          color="secondary"
+          elevation={20}
+          onClick={this.handleCreateProductModal}
+          className={classes.actionButton}
+        >
+          <AddIcon />
+        </Button>
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <Typography variant="headline" component="h2">
@@ -98,26 +114,36 @@ class HomePage extends Component {
           {productCards}
         </Grid>
         <Modal
+          className={classes.productDetailPaper}
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.showProductDetailModal}
+          onClose={() => this.setState({ showProductDetailModal: false })}
+        >
+          <Paper className={classes.productDetailPaper} elevation={1}>
+            <Typography variant="title" id="modal-title">
+              {this.state.productDetail.name}
+            </Typography>
+            <Typography variant="subheading" id="simple-modal-description">
+              {this.state.productDetail.detail}
+            </Typography>
+            <Typography variant="subheading" id="simple-modal-description">
+              {this.state.productDetail.quantity === 0
+                ? "Out of stock"
+                : `In stock: ${this.state.productDetail.quantity}`}
+            </Typography>
+          </Paper>
+        </Modal>
+        <Modal
           className={classes.modal}
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.showModal}
-          onClose={() => this.setState({ showModal: false })}
+          open={this.state.showCreateProductModal}
+          onClose={() => this.setState({ showCreateProductModal: false })}
         >
-            <Paper className={classes.paper} elevation={1}>
-              <Typography variant="title" id="modal-title">
-                {this.state.productDetail.name}
-              </Typography>
-              <Typography variant="subheading" id="simple-modal-description">
-                {this.state.productDetail.detail}
-              </Typography>
-              <Typography variant="subheading" id="simple-modal-description">
-                {this.state.productDetail.quantity === 0 ?
-                'Out of stock' :
-                `In stock: ${this.state.productDetail.quantity}`
-              }
-              </Typography>
-            </Paper>
+          <Paper className={classes.createProductPaper} elevation={1}>
+            <CreateProduct />
+          </Paper>
         </Modal>
       </div>
     );

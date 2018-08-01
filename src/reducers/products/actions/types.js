@@ -1,3 +1,4 @@
 export default {
-  GET_PRODUCTS: "Add an user"
+  GET_PRODUCTS: "Add an user",
+  CREATE: "Create product"
 };

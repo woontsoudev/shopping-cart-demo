@@ -1,4 +1,4 @@
-import actions from './actions/types';
+import actions from "./actions/types";
 
 const defaultState = {
   list: []
@@ -11,6 +11,11 @@ export default (state = defaultState, action) => {
     case actions.GET_PRODUCTS:
       return {
         list: action.products
+      };
+    case actions.CREATE:
+      console.log("passing por products reducer");
+      return {
+        list: [...state.list, action.product]
       };
     default:
       return state;

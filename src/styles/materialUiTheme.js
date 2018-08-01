@@ -1,11 +1,10 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
-import red from '@material-ui/core/colors/red';
 
 const materialUiTheme = createMuiTheme({
     palette: {
-        primary: purple,
-        secondary: red,
+        primary: purple['#4A148C'],
+        secondary: purple['#AA00FF'],
     },
     status: {
         danger: 'orange',

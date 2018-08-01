@@ -46,6 +46,6 @@ export default (state = defaultState, action) => {
     case actions.REGISTER:
       return {...state, registered: true}
     default:
-      return state;
+      return {...state};
   }
 };

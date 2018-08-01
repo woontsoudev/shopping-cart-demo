@@ -9,13 +9,29 @@ export default (state = defaultState, action) => {
 
   switch (action.type) {
     case actions.ADD_PRODUCT:
-      products.push(action.product);
-      return { products };
+      let isOnCart = false;
+      const productList = products.map(product => {
+        if (product._id === action.product._id) {
+          isOnCart = true;
+          if (product.quantity > 0) {
+            product.quantity--;
+            product.inCartQuantity++;
+          }
+        }
+        return product;
+      });
+      if (isOnCart) {
+        return { products: productList };
+      } else {
+        action.product.quantity--;
+        products.push(action.product);
+        return { products };
+      }
     case actions.REMOVE_PRODUCT:
-      const newState = products.filter(product => {
+      const productsList = products.filter(product => {
         return product._id !== action.productId;
       });
-      return { products: newState };
+      return { products: productsList };
     case actions.CLEAR_ALL:
       return {
         products: []

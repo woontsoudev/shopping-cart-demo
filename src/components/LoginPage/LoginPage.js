@@ -24,6 +24,10 @@ class LoginPage extends Component {
     this.props.registerUser(this.props.loginForm.values);
   };
 
+  handleSnackClose = () => {
+
+  }
+
   render() {
     const { classes, loginForm } = this.props;
 

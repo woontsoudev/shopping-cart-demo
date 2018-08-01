@@ -13,6 +13,9 @@ import {
   clearAllAction,
   checkoutAction
 } from "../../reducers/shoppingCart/actions/index";
+import {
+  getProductsAction
+} from '../../reducers/products/actions/index';
 
 import {
   Layout,
@@ -24,7 +27,8 @@ import {
 class App extends Component {
   state = {
     showDrawer: false,
-    showModal: false
+    showModal: false,
+    openSnack: true
   };
 
   componentDidMount() {
@@ -51,9 +55,14 @@ class App extends Component {
   };
 
   handleCheckoutProducts = () => {
-    this.props.checkoutProducts();
+    this.props.checkoutProducts(this.props.shoppingCart);
     this.setState({ showModal: true });
   };
+
+  handleModalClose = () => {
+    this.props.getProducts();
+    this.setState({ showModal: false });
+  }
 
   render() {
     const { classes } = this.props;
@@ -91,7 +100,7 @@ class App extends Component {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={this.state.showModal}
-            onClose={() => this.setState({ showModal: false })}
+            onClose={this.handleModalClose}
           >
             <Paper className={classes.paper} elevation={1}>
               <Typography
@@ -130,6 +139,9 @@ function mapDispatchToProps(dispatch) {
     },
     checkoutProducts() {
       dispatch(checkoutAction(...arguments));
+    },
+    getProducts() {
+      dispatch(getProductsAction(...arguments));
     }
   };
 }

@@ -6,6 +6,9 @@ const addProduct = (product) => ({
 });
 
 const addProductsAsync = (product) => {
+  if (!product.inCartQuantity) {
+    product.inCartQuantity = 1;
+  }
   return dispatch => {
     dispatch(addProduct(product));
   };

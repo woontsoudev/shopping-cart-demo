@@ -31,7 +31,6 @@ const Layout = props => {
   } = props;
   const shoppingCartCount = shoppingCartProducts.length;
   const productsList = shoppingCartProducts.map((product, i) => {
-
     return (
       <ListItem key={product._id + i}>
         <ListItemAvatar>
@@ -39,7 +38,14 @@ const Layout = props => {
             <FolderIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={product.name} secondary={product.detail} />
+        <ListItemText
+          primary={product.name}
+          secondary={
+            product.quantity === 0
+              ? `Maximun: ${product.inCartQuantity}`
+              : `Quantity: ${product.inCartQuantity}`
+          }
+        />
         <ListItemSecondaryAction>
           <IconButton
             aria-label="Delete"
@@ -54,16 +60,18 @@ const Layout = props => {
 
   return (
     <section className={classes.section}>
-      {showHeader ? <header>
-        <Header
-          logout={logout}
-          showDrawer={showDrawer}
-          toggleDrawer={toggleDrawer}
-          shoppingCartCount={shoppingCartCount}
-        />
-      </header>: null}
+      {showHeader ? (
+        <header>
+          <Header
+            logout={logout}
+            showDrawer={showDrawer}
+            toggleDrawer={toggleDrawer}
+            shoppingCartCount={shoppingCartCount}
+          />
+        </header>
+      ) : null}
       <main className={classes.main}>{children}</main>
-      <footer className={classes.footer}></footer>
+      <footer className={classes.footer} />
       <Drawer
         anchor="right"
         open={showDrawer}
@@ -92,10 +100,7 @@ const Layout = props => {
           >
             Checkout
           </Button>
-          <Button
-            onClick={clearAllShoppingCart}
-            className={classes.btn}
-          >
+          <Button onClick={clearAllShoppingCart} className={classes.btn}>
             Clear Cart
           </Button>
         </div>

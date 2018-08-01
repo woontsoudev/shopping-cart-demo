@@ -15,9 +15,17 @@ const styles = theme => ({
   modal: {
     display: "flex"
   },
-  paper: {
+  productDetailPaper: {
     width: "300px",
     height: "200px",
+    margin: "auto",
+    ...theme.mixins.gutters(),
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  },
+  createProductPaper : {
+    width: "500px",
+    height: "450px",
     margin: "auto",
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
@@ -26,6 +34,18 @@ const styles = theme => ({
   actions: {
     display: 'flex',
     justifyContent: 'flex-end'
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  extendedIcon: {
+    marginRight: theme.spacing.unit,
+  },
+  actionButton: {
+    position: 'fixed',
+    right: '5%',
+    bottom: '5%',
+    zIndex: 1
   }
 });
 
